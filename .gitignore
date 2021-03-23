@@ -1,11 +1,4 @@
-*.*~
-*.pkl
-*.t7
-*.pyc 
-*.txt
-
-tensor-completion/
+data/
 cv/
-data/mit-states/
-data/glove/
-data/ut-zap50k
+tensor-completion/
+
