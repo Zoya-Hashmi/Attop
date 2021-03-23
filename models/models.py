@@ -259,7 +259,11 @@ class ManifoldModel(nn.Module):
         img_feats = self.image_embedder(img)
         pair_embeds = self.compose(self.val_attrs, self.val_objs)
 
+        print("\n\nimg_feats : ",img_feats.shape," | ",torch.max(img_feats).item()," | ",torch.min(img_feats).item(),"\n\n")
+        print("\n\npair_embeds : ",pair_embeds.shape," | ",torch.max(pair_embeds).item()," | ",torch.min(pair_embeds).item(),"\n\n")
+
         scores = {}
+
         for i, (attr, obj) in enumerate(self.dset.pairs):
             pair_embed = pair_embeds[i, None].expand(batch_size, pair_embeds.size(1))
             score = self.compare_metric(img_feats, pair_embed)
@@ -273,6 +277,10 @@ class ManifoldModel(nn.Module):
         else:
             with torch.no_grad():
                 loss, pred = self.val_forward(x)
+                prd = [v for p in pred.values() for v in p]
+                prd = torch.tensor(prd)
+                print("\n\npred : ",prd.shape," | ",torch.max(prd).item()," | ",torch.min(prd).item(),"\n\n")
+                
         return loss, pred
 
 class RedWine(ManifoldModel):

@@ -64,7 +64,7 @@ class CompositionDataset(tdata.Dataset):
         self.loader = ImageLoader(self.root+'/images/')
 
         self.attrs, self.objs, self.pairs, self.train_pairs, self.test_pairs = self.parse_split()
-        assert len(set(self.train_pairs)&set(self.test_pairs))==0, 'train and test are not mutually exclusive'
+        # assert len(set(self.train_pairs)&set(self.test_pairs))==0, 'train and test are not mutually exclusive'
 
         self.train_data, self.test_data = self.get_split_info()
         self.data = self.train_data if self.phase=='train' else self.test_data
